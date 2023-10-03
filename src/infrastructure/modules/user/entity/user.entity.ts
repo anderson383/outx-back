@@ -32,7 +32,7 @@ export class UserEntity extends BaseEntity {
   @Column()
     email: string;
 
-  @Column()
+  @Column({nullable: true})
     username: string;
 
   @ManyToMany(() => CampusEntity)

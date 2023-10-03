@@ -2,6 +2,7 @@ import {
   Column, Entity, ManyToMany, ManyToOne
 } from 'typeorm';
 import { BaseEntity } from 'src/infrastructure/config/entity/base.entity';
+import { CategoryCampusEntity } from './category-campus.entity';
 import { CompanyEntity } from './company.entity';
 import { UserEntity } from '../../user/entity/user.entity';
 
@@ -28,6 +29,9 @@ export class CampusEntity extends BaseEntity {
   @ManyToOne(() => CompanyEntity)
     company: CompanyEntity;
 
-  @ManyToMany(() => UserEntity, user => user.campus)
-    users: UserEntity[];
+  @ManyToOne(() => CategoryCampusEntity)
+    category?: CategoryCampusEntity;
+
+  // @ManyToMany(() => UserEntity, user => user.campus)
+  //   users: UserEntity[];
 }

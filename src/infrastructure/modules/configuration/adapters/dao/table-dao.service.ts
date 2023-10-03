@@ -6,29 +6,30 @@ import { TableListDto } from 'src/application/comanders/dtos/table.dto';
 @Injectable()
 export class TableDaoService implements TableDao {
   constructor(@InjectEntityManager() private entityManager: EntityManager) {}
-  async listTableForConfig(): Promise<TableListDto[]> {
-    const query = this.entityManager
-      .createQueryBuilder<TableListDto>('Table', 'table')
-      .select(['table.id', 'table.name', 'table.code']);
 
-    return query.getMany();
-  }
+  // async listTableForConfig(): Promise<TableListDto[]> {
+  //   const query = this.entityManager
+  //     .createQueryBuilder<TableListDto>('Table', 'table')
+  //     .select(['table.id', 'table.name', 'table.code']);
 
-  async getTable(id: string): Promise<TableListDto> {
-    const query = this.entityManager
-      .createQueryBuilder<TableListDto>('Table', 'table')
-      .select(['table.id', 'table.name', 'table.code', 'table.auth_id', 'table.auth_password']).where('id =:id', {id});
+  //   return query.getMany();
+  // }
 
-    return query.getOne();
-  }
+  // async getTable(id: string): Promise<TableListDto> {
+  //   const query = this.entityManager
+  //     .createQueryBuilder<TableListDto>('Table', 'table')
+  //     .select(['table.id', 'table.name', 'table.code', 'table.auth_id', 'table.auth_password']).where('id =:id', {id});
 
-  async getTableForDeviceAndPass(device:string, pass:string): Promise<TableListDto> {
-    const query = this.entityManager
-      .createQueryBuilder<TableListDto>('Table', 'table')
-      .select(['table.id', 'table.name', 'table.code', 'table.auth_id', 'table.auth_password'])
-      .where('auth_id=:device', {device})
-      .andWhere('auth_password=:pass', {pass});
+  //   return query.getOne();
+  // }
 
-    return query.getOne();
-  }
+  // async getTableForDeviceAndPass(device:string, pass:string): Promise<TableListDto> {
+  //   const query = this.entityManager
+  //     .createQueryBuilder<TableListDto>('Table', 'table')
+  //     .select(['table.id', 'table.name', 'table.code', 'table.auth_id', 'table.auth_password'])
+  //     .where('auth_id=:device', {device})
+  //     .andWhere('auth_password=:pass', {pass});
+
+  //   return query.getOne();
+  // }
 }

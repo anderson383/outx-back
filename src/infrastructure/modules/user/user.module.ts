@@ -24,6 +24,10 @@ import { UserController } from './controllers/user.controller';
   exports: [{
     provide: UserDao,
     useClass: DaoUserService
+  },
+  {
+    provide: RepositoryUser,
+    useClass: RepositoryUserService
   }],
   controllers: [UserController]
 })

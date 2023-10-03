@@ -21,6 +21,6 @@ export class DaoUserService implements UserDao {
     const query = this.entityManager.createQueryBuilder<UserEntity>('User', 'u')
       .select(['u.id', 'u.name', 'u.email', 'u.password']).where('u.email=:email', {email});
 
-    return query.getOneOrFail();
+    return query.getOne();
   }
 }

@@ -1,7 +1,6 @@
 import {
   Column, ManyToOne, PrimaryGeneratedColumn
 } from 'typeorm';
-import { UserEntity } from 'src/infrastructure/modules/user/entity/user.entity';
 export class BaseEntity {
   @PrimaryGeneratedColumn('uuid')
     id: string;
@@ -19,9 +18,9 @@ export class BaseEntity {
   })
     updated_date: Date;
 
-  @ManyToOne(() => UserEntity, {nullable: true})
-    created_user: UserEntity;
+  // @ManyToOne(() => UserEntity, {nullable: true})
+  //   created_user: UserEntity;
 
-  @ManyToOne(() => UserEntity, {nullable: true})
-    updated_user: UserEntity;
+  // @ManyToOne(() => UserEntity, {nullable: true})
+  //   updated_user: UserEntity;
 }

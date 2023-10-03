@@ -7,6 +7,6 @@ export class ListTableHandler {
 
   }
   async execute() {
-    return this._tableDao.listTableForConfig();
+    // return this._tableDao.listTableForConfig();
   }
 }

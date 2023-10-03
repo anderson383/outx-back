@@ -12,14 +12,28 @@ export class CompanyEntity extends BaseEntity {
     name: string;
 
   @Column({
+    length: 100,
+    type: 'varchar'
+  })
+    nit: string;
+
+  @Column({
+    length: 100,
+    type: 'varchar'
+  })
+    reasonSocial: string;
+
+  @Column({
+    nullable: true,
     length: 200,
     type: 'varchar'
   })
-    address: string;
+    address?: string;
 
   @Column({
+    nullable: true,
     length: 15,
     type: 'varchar'
   })
-    contact: string;
+    contact?: string;
 }
