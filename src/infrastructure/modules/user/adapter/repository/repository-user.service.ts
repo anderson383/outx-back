@@ -15,8 +15,9 @@ export class RepositoryUserService implements RepositoryUser {
       .values({
         name: user.fullName,
         email: user.email,
-        password: user.password,
-        uid: user.uid
+        uid: user.uid,
+        campusId: user.campusId
+
         // jsonData: user.jsonData
       })
       .execute();

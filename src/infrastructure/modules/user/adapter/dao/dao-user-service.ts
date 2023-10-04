@@ -19,7 +19,14 @@ export class DaoUserService implements UserDao {
 
   async getUserByEmail(email: string): Promise<UserEntity> {
     const query = this.entityManager.createQueryBuilder<UserEntity>('User', 'u')
-      .select(['u.id', 'u.name', 'u.email', 'u.password']).where('u.email=:email', {email});
+      .select(['u.id', 'u.name', 'u.email']).where('u.email=:email', {email});
+
+    return query.getOne();
+  }
+
+  async getUserByUid(uid: string): Promise<UserEntity> {
+    const query = this.entityManager.createQueryBuilder<UserEntity>('User', 'u')
+      .select(['u.id', 'u.name', 'u.email']).where('u.uid=:uid', {uid});
 
     return query.getOne();
   }

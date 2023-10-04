@@ -1,22 +1,22 @@
 import { AuthDataSignDto } from 'src/application/comanders/dtos/auth.dto';
+import { CampusEntity } from '../../entities/campus.entity';
+import { CampusRepository } from 'src/domain/configuration/repository/campus';
 import { CompanyEntity } from '../../entities/company.entity';
-import { CompanyRepository } from 'src/domain/configuration/repository/company';
 import { EntityManager } from 'typeorm';
 import { InjectEntityManager } from '@nestjs/typeorm';
 
-export class CompanyService implements CompanyRepository {
+export class CampusService implements CampusRepository {
   constructor(@InjectEntityManager() private entityManager: EntityManager) {}
 
-  async createCompanyForSignUp(user: AuthDataSignDto): Promise<any> {
+  async createCampusForSignUp(name:string, companyId:string): Promise<string> {
     const insertResult = await this.entityManager
       .createQueryBuilder()
       .insert()
 
-      .into(CompanyEntity)
+      .into(CampusEntity)
       .values({
-        name: user.fullNameCompany,
-        nit: user.nit,
-        reasonSocial: user.reasonSocial
+        name,
+        companyId
       })
       .execute();
 

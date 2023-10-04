@@ -41,8 +41,8 @@ export class UserEntity extends BaseEntity {
   @ManyToMany(() => CampusEntity)
     campus?: CampusEntity[];
 
-  @Column()
-    password: string;
+  @Column({nullable: true})
+    campusId?: string;
 
   @Column({
     default: false

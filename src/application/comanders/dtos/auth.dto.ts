@@ -1,6 +1,6 @@
 import {
   IsBoolean,
-  IsEmail, IsNotEmpty, IsString, ValidateIf
+  IsEmail, IsNotEmpty, IsString, Length, ValidateIf
 } from 'class-validator';
 
 export class AuthDto {
@@ -31,6 +31,7 @@ export class AuthDataSignDto {
   @IsString()
     sex: string;
 
+  @Length(6, 100)
   @IsNotEmpty()
   @IsString()
     password: string;
@@ -65,4 +66,5 @@ export class AuthDataSignDto {
     category: string;
 
   uid?: string;
+  campusId?: string;
 }
