@@ -44,6 +44,14 @@ export class UserEntity extends BaseEntity {
   @Column()
     password: string;
 
- 
+  @Column({
+    default: false
+    })
+    isGoogle: boolean;
+
+  @Column({
+    default: false
+    })
+    isFacebook: boolean;
 }
 

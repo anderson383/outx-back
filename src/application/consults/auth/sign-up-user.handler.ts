@@ -5,19 +5,14 @@ import {
   HttpException,
   Injectable, NotFoundException, UnauthorizedException
 } from '@nestjs/common';
-import {
-  AuthCredentialsDto, AuthDataSignDto
-} from 'src/application/comanders/dtos/auth.dto';
 import { AuthDao } from 'src/domain/auth/dao/auth.dao';
-import { JwtService } from '@nestjs/jwt';
-import { UserDao } from 'src/domain/user/dao/dao-user';
-import { RepositoryUser } from 'src/domain/user/repository/repository-user';
+import {AuthDataSignDto} from 'src/application/comanders/dtos/auth.dto';
+import { authFireBase } from 'src/main';
 import { CompanyRepository } from 'src/domain/configuration/repository/company';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { authFireBase } from 'src/main';
-import {
-  HTTP_CODES, ResponseCommon
-} from 'src/infrastructure/config/constants/common';
+import { JwtService } from '@nestjs/jwt';
+import { RepositoryUser } from 'src/domain/user/repository/repository-user';
+import { UserDao } from 'src/domain/user/dao/dao-user';
 
 @Injectable()
 export class SignUpUserHandler {
