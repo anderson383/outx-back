@@ -1,11 +1,13 @@
 import {
-  CallHandler, ExecutionContext, Injectable, NestInterceptor
+  CallHandler, ExecutionContext, HttpException, Injectable, NestInterceptor
 } from '@nestjs/common';
-import { map } from 'rxjs/operators';
+import {
+  catchError, map
+} from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 export interface IResponseHttp<T> {
-  results: T[];
+  data: T[];
   count?: number;
 }
 
@@ -16,29 +18,43 @@ export class TransformInterceptor<T> implements NestInterceptor<T, IResponseHttp
     const { statusCode } = context.switchToHttp().getResponse();
 
     return next.handle().pipe(
-      map((data:any) => {
-        try {
-          let {
-            results, count
-          } = data;
+      catchError(err => {
+        let customError;
 
-          if (!results) {
-            results = data;
-          }
-          count = results.length ? results.length : 0;
-
-          return {
-            status: statusCode,
-            count,
-            results
+        if (err.response) {
+          customError = {
+            status: err.status,
+            message: err.response.message,
+            data: err.response.error
           };
-        } catch (err) {
-          return {
-            status: statusCode,
-            count: 0,
-            results: []
+        } else {
+          customError = {
+            status: err.code,
+            message: err.meta?.cause,
+            data: err.meta
           };
         }
+        throw new HttpException(customError, err.status);
+      }),
+      map((dataPayload:any) => {
+        try {
+          let { data } = dataPayload;
+
+          if (!data) {
+            data = dataPayload;
+          }
+          const message = data.message;
+
+          if (data.message) {
+            delete data.message;
+          }
+
+          return {
+            status: statusCode,
+            message,
+            data: data
+          };
+        } catch (err) {}
       })
     );
   }

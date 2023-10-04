@@ -22,11 +22,14 @@ export class UserEntity extends BaseEntity {
   @Column()
     name: string;
 
+  @Column()
+    uid: string;
+
   @Column({
     nullable: true,
     type: 'jsonb',
     transformer: new JsonObjectTransformer()
-  })
+    })
     jsonData: object;
 
   @Column()
@@ -40,5 +43,7 @@ export class UserEntity extends BaseEntity {
 
   @Column()
     password: string;
+
+ 
 }
 

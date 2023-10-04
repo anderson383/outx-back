@@ -63,4 +63,6 @@ export class AuthDataSignDto {
   @IsNotEmpty()
   @IsString()
     category: string;
+
+  uid?: string;
 }

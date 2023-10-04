@@ -13,14 +13,14 @@ import { UserModule } from './modules/user/user.module';
   TypeOrmModule.forRootAsync({
     useFactory: dataBaseConfigFactory,
     inject: [ConfigService]
-  }),
+    }),
   ConfigModule.forRoot({
     envFilePath: `env/${ process.env.NODE_ENV }.env`,
     isGlobal: true
-  }),
+    }),
   UserModule,
   AuthModule,
   ProductModule,
   ConfigurationModule
-] })
+  ] })
 export class InfrastructureModule {}

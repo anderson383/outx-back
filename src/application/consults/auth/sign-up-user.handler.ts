@@ -13,6 +13,11 @@ import { JwtService } from '@nestjs/jwt';
 import { UserDao } from 'src/domain/user/dao/dao-user';
 import { RepositoryUser } from 'src/domain/user/repository/repository-user';
 import { CompanyRepository } from 'src/domain/configuration/repository/company';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { authFireBase } from 'src/main';
+import {
+  HTTP_CODES, ResponseCommon
+} from 'src/infrastructure/config/constants/common';
 
 @Injectable()
 export class SignUpUserHandler {
@@ -24,16 +29,24 @@ export class SignUpUserHandler {
     private _userDao: UserDao,
     private jwtService: JwtService
   ) {}
-  async execute(singUp: AuthDataSignDto): Promise<any> {
+  async execute(singUp: AuthDataSignDto): Promise<string> {
     const findUser = await this._userDao.getUserByEmail(singUp.email);
 
     if (findUser) {
       throw new NotFoundException('El usuario con el correo ya existe');
     } else {
-      this._userRepository.create(singUp);
+      const userFireBase = await createUserWithEmailAndPassword(authFireBase, singUp.email, singUp.password);
+
+      await this._userRepository.create({
+        ...singUp,
+        uid: userFireBase.user.uid
+      });
+
       if (singUp.isCompany) {
-        this._companyRepository.createCompanyForSignUp(singUp);
+        await this._companyRepository.createCompanyForSignUp(singUp);
       }
+
+      return '¡Usuario creado correctamente!';
     }
   }
 }
