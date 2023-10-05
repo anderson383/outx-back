@@ -29,7 +29,7 @@ export class AuthDataSignDto {
 
   @IsNotEmpty()
   @IsString()
-    sex: string;
+    gender: string;
 
   @Length(6, 100)
   @IsNotEmpty()
