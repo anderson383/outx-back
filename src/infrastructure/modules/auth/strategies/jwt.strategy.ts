@@ -24,14 +24,11 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 
   async validate(userPayload: AuthDto): Promise<any> {
     // Validate user roles
-    console.log(userPayload);
     const user = await this._userDao.getUserByEmail(userPayload.email);
 
     if (!user) {
       throw new UnauthorizedException();
     }
-
-    console.log(user);
 
     return {
       id: user.id,
