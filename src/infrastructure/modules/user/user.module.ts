@@ -7,10 +7,12 @@ import { Module } from '@nestjs/common';
 import { RepositoryUser } from 'src/domain/user/repository/repository-user';
 import { RepositoryUserService } from './adapter/repository/repository-user.service';
 import { UserController } from './controllers/user.controller';
+import { GetUserAuthHandler } from 'src/application/consults/user/get-user.handler';
 
 @Module({
   providers: [
     ListUserHandler,
+    GetUserAuthHandler,
     CreateUserHandler,
     {
       provide: UserDao,

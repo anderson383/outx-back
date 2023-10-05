@@ -19,12 +19,6 @@ import { JwtService } from '@nestjs/jwt';
 import { RepositoryUser } from 'src/domain/user/repository/repository-user';
 import { UserDao } from 'src/domain/user/dao/dao-user';
 
-interface SingUpResponse {
-  message: string
-  accessToken: string;
-  refreshToken: string
-}
-
 @Injectable()
 export class SignUpUserHandler {
   constructor(
@@ -37,26 +31,30 @@ export class SignUpUserHandler {
     private _userDao: UserDao,
     private jwtService: JwtService
   ) {}
-  public async execute(singUp: AuthDataSignDto): Promise<SingUpResponse> {
+  public async execute(singUp: AuthDataSignDto): Promise<{
+    message: string
+    accessToken: string;
+    refreshToken: string
+  }> {
     const findUser = await this._userDao.getUserByEmail(singUp.email);
 
     if (findUser) {
       throw new NotFoundException('El usuario con el correo ya existe xd');
     } else {
       try {
-        let campusId = null;
+        let companyId = null;
         const userFireBase = await createUserWithEmailAndPassword(authFireBase, singUp.email, singUp.password);
 
         if (singUp.isCompany) {
-          const companyId = await this._companyRepository.createCompanyForSignUp(singUp);
+          companyId = await this._companyRepository.createCompanyForSignUp(singUp);
 
-          campusId = await this._campusRepository.createCampusForSignUp(singUp.fullName, companyId);
+          await this._campusRepository.createCampusForSignUp(singUp.fullName, companyId);
         }
 
         await this._userRepository.create({
           ...singUp,
           uid: userFireBase.user.uid,
-          campusId
+          companyId
         });
 
         return {

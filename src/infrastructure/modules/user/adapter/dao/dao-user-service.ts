@@ -30,4 +30,11 @@ export class DaoUserService implements UserDao {
 
     return query.getOne();
   }
+
+  async getUserAuth(id: string): Promise<UserEntity> {
+    const query = this.entityManager.createQueryBuilder<UserEntity>('User', 'u')
+      .select(['u.id', 'u.name', 'u.email', 'u.username', 'u.companyId', 'u.isGoogle', 'u.companyId', 'u.isFacebook', 'u.jsonData', 'u.photoUrl']).where('u.id=:id', {id});
+
+    return query.getOne();
+  }
 }

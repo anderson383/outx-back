@@ -36,4 +36,9 @@ export class CompanyEntity extends BaseEntity {
     type: 'varchar'
   })
     contact?: string;
+
+  @Column({
+    default: false
+  })
+    isVerify?: boolean;
 }

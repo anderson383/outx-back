@@ -5,4 +5,5 @@ export abstract class UserDao {
   abstract list(): Promise<UserListDto[]>;
   abstract getUserByEmail(email:string): Promise<UserEntity>;
   abstract getUserByUid(email:string): Promise<UserEntity>;
+  abstract getUserAuth(id: string): Promise<UserEntity>;
 }

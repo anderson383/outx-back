@@ -60,11 +60,6 @@ export class AuthDataSignDto {
   @IsString()
     cedula: string;
 
-  @ValidateIf(object => object.isCompany === true)
-  @IsNotEmpty()
-  @IsString()
-    category: string;
-
   uid?: string;
-  campusId?: string;
+  companyId?: string;
 }

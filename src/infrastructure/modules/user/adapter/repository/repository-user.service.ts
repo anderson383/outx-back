@@ -16,7 +16,7 @@ export class RepositoryUserService implements RepositoryUser {
         name: user.fullName,
         email: user.email,
         uid: user.uid,
-        campusId: user.campusId
+        companyId: user.companyId
 
         // jsonData: user.jsonData
       })
