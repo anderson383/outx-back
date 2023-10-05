@@ -44,19 +44,20 @@ export class SignUpUserHandler {
       throw new NotFoundException('El usuario con el correo ya existe xd');
     } else {
       try {
+        let campusId = null;
         const userFireBase = await createUserWithEmailAndPassword(authFireBase, singUp.email, singUp.password);
 
         if (singUp.isCompany) {
           const companyId = await this._companyRepository.createCompanyForSignUp(singUp);
 
-          const campusId = await this._campusRepository.createCampusForSignUp(singUp.fullName, companyId);
-
-          await this._userRepository.create({
-            ...singUp,
-            uid: userFireBase.user.uid,
-            campusId
-          });
+          campusId = await this._campusRepository.createCampusForSignUp(singUp.fullName, companyId);
         }
+
+        await this._userRepository.create({
+          ...singUp,
+          uid: userFireBase.user.uid,
+          campusId
+        });
 
         return {
           message: '¡Usuario creado correctamente!',
