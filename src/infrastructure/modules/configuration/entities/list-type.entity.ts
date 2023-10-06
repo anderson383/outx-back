@@ -4,7 +4,7 @@ import {
 import { BaseEntity } from 'src/infrastructure/config/entity/base.entity';
 
 @Entity({ name: 'ListType' })
-export class ListType extends BaseEntity {
+export class ListTypeEntity extends BaseEntity {
   @Column({
     length: 100,
     type: 'varchar',
