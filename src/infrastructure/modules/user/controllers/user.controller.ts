@@ -4,9 +4,9 @@ import {
 } from '@nestjs/common';
 import { AuthCustomGuard } from '../../auth/guards/auth.guard';
 import { CreateUserHandler } from 'src/application/comanders/user/create-user.handler';
+import { GetUserAuthHandler } from 'src/application/consults/user/get-user.handler';
 import { ListUserHandler } from 'src/application/consults/user/list-user.handler';
 import { UserCreateDto } from 'src/application/comanders/dtos/user-create.dto';
-import { GetUserAuthHandler } from 'src/application/consults/user/get-user.handler';
 
 @Controller('user')
 export class UserController {

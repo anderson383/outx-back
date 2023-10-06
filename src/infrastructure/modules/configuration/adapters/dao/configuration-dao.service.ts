@@ -1,10 +1,10 @@
+import {
+  CategoryCampusEntity, CategoryCompanyEntity
+} from 'src/infrastructure/modules/configuration/entities/category-campus.entity';
 import { ConfigurationDao } from 'src/domain/configuration/dao/configuration.dao';
 import { EntityManager } from 'typeorm';
 import { Injectable } from '@nestjs/common';
 import { InjectEntityManager } from '@nestjs/typeorm';
-import {
-  CategoryCampusEntity, CategoryCompanyEntity
-} from 'src/infrastructure/modules/configuration/entities/category-campus.entity';
 
 @Injectable()
 export class ConfigurationDaoService implements ConfigurationDao {
