@@ -8,7 +8,7 @@ export class CategoryEntity extends BaseEntity {
   @Column({
     length: 100,
     type: 'varchar'
-  })
+    })
     name: string;
   @Column({type: 'text'})
     description: string;
@@ -19,7 +19,7 @@ export class CategoryEntity extends BaseEntity {
   @Column({
     type: 'text',
     array: true
-  })
+    })
     images: string[];
 
   // @Column({type: 'number'})

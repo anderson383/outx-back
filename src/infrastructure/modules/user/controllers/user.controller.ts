@@ -24,8 +24,6 @@ export class UserController {
   @UseGuards(AuthCustomGuard)
   @Get('/detail-user')
   async getUserAuth(@Request() req) {
-    console.log('Hola!! xd', req.user);
-
     return this._getUserAuth.execute(req.user.id);
   }
 
