@@ -9,19 +9,19 @@ export class ListTypeEntity extends BaseEntity {
     length: 100,
     type: 'varchar',
     unique: true
-  })
+    })
     code: string;
 
   @Column({
     length: 200,
     type: 'varchar'
-  })
+    })
     name: string;
 
   @Column({
     nullable: true,
     length: 200,
     type: 'varchar'
-  })
+    })
     description?: string;
 }

@@ -11,27 +11,27 @@ import { GetUserAuthHandler } from 'src/application/consults/user/get-user.handl
 
 @Module({
   providers: [
-    ListUserHandler,
-    GetUserAuthHandler,
-    CreateUserHandler,
-    {
-      provide: UserDao,
-      useClass: DaoUserService
-    },
-    {
-      provide: RepositoryUser,
-      useClass: RepositoryUserService
-    }
-  ],
-  exports: [{
-    provide: UserDao,
-    useClass: DaoUserService
+  ListUserHandler,
+  GetUserAuthHandler,
+  CreateUserHandler,
+  {
+  provide: UserDao,
+  useClass: DaoUserService
   },
   {
-    provide: RepositoryUser,
-    useClass: RepositoryUserService
+  provide: RepositoryUser,
+  useClass: RepositoryUserService
+  }
+  ],
+  exports: [{
+  provide: UserDao,
+  useClass: DaoUserService
+  },
+  {
+  provide: RepositoryUser,
+  useClass: RepositoryUserService
   }],
   controllers: [UserController]
-})
+  })
 export class UserModule {}
 

@@ -15,26 +15,26 @@ import { UserModule } from '../user/user.module';
 
 @Module({
   imports: [
-    UserModule,
-    ConfigurationModule,
-    PassportModule.register({ defaultStrategy: 'jwt' }),
-    JwtModule.register({
-      secret: SECRET_KEYJWT,
-      signOptions: { expiresIn: '1h' }
+  UserModule,
+  ConfigurationModule,
+  PassportModule.register({ defaultStrategy: 'jwt' }),
+  JwtModule.register({
+    secret: SECRET_KEYJWT,
+    signOptions: { expiresIn: '1h' }
     })
   ],
   providers: [
-    SignInUserHandler,
-    SignUpUserHandler,
-    GetUserRolesHandler,
-    JwtStrategy,
-    {
-      provide: AuthDao,
-      useClass: AuthDaoService
-    }
+  SignInUserHandler,
+  SignUpUserHandler,
+  GetUserRolesHandler,
+  JwtStrategy,
+  {
+  provide: AuthDao,
+  useClass: AuthDaoService
+  }
   ],
   controllers: [
-    AuthController
+  AuthController
   ]
-})
+  })
 export class AuthModule {}
