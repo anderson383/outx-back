@@ -6,6 +6,7 @@ import { ConfigurationController } from './controllers/configuration.controller'
 import { ConfigurationDao } from 'src/domain/configuration/dao/configuration.dao';
 import { ConfigurationDaoService } from './adapters/dao/configuration-dao.service';
 import { GetCategoryHandler } from 'src/application/consults/configuration/get-category.handler';
+import { GetGenericListHandler } from 'src/application/consults/configuration/get-generic-list.handler';
 import { Module } from '@nestjs/common';
 
 const providerAndExport = [
@@ -28,6 +29,7 @@ const providerAndExport = [
 
   ],
   providers: [
+  GetGenericListHandler,
   GetCategoryHandler,
   ...providerAndExport
   ],

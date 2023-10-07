@@ -21,6 +21,8 @@ export class TransformInterceptor<T> implements NestInterceptor<T, IResponseHttp
       catchError(err => {
         let customError;
 
+        console.log(err, 'Error xd');
+
         if (err.response) {
           customError = {
             status: err.status,

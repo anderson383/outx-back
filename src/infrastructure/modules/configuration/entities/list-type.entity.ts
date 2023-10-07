@@ -1,7 +1,8 @@
 import {
-  Column, Entity
+  Column, Entity, OneToMany
 } from 'typeorm';
 import { BaseEntity } from 'src/infrastructure/config/entity/base.entity';
+import { ListItemEntity } from './list-item.entity';
 
 @Entity({ name: 'ListType' })
 export class ListTypeEntity extends BaseEntity {
@@ -24,4 +25,8 @@ export class ListTypeEntity extends BaseEntity {
     type: 'varchar'
     })
     description?: string;
+
+  @OneToMany((type) => ListItemEntity, lisItem => lisItem.listType)
+
+    listItem?: ListItemEntity[];
 }
