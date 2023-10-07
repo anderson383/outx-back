@@ -23,16 +23,15 @@ export class ConfigurationController {
     return this._categoryHandler.executeForCampus(id);
   }
 
-
   @Get('/generic-list/:code')
-  async getForListItem(@Param('code') code: string): Promise<any> {
+  async getForListItem(@Param('code') code: string) {
     return this._genericListHandler.getOneForCode(code);
   }
 
   @Get('/generic-list-all')
   async getListItemForParent(
     @Query('codes', ParseArrayPipe) codes: string[],
-  ): Promise<any> {
+  ) {
     return this._genericListHandler.getAllForCodes(codes);
   }
 }

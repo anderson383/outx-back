@@ -32,14 +32,15 @@ export class ConfigurationDaoService implements ConfigurationDao {
     return query.getMany();
   }
 
-  getOneForCode(code: string): Promise<any> {
+  getOneForCode(code: string): Promise<ListItemEntity[]> {
     const query = this.entityManager.createQueryBuilder<ListItemEntity>('ListItem', 'li')
       .select(['li.id', 'li.name', 'li.code', 'li.description'])
-      .where('li.listType = :code', {code});
+      .innerJoin('li.listType', 'listType')
+      .where('listType.code = :code', {code});
 
     return query.getMany();
   }
-  getAllForCodes(codes: string[]): Promise<any> {
+  getAllForCodes(codes: string[]): Promise<ListTypeEntity[]> {
     const query = this.entityManager.createQueryBuilder<ListTypeEntity>('ListType', 'lt')
       .leftJoinAndSelect('lt.listItem', 'listItem')
       .select(['lt.id', 'lt.name', 'lt.code', 'lt.description', 'listItem'])
