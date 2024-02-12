@@ -32,4 +32,4 @@ import { UserModule } from '../user/user.module';
     AuthController
   ]
 })
-export class AuthModule {}  
+export class AuthModule {}
