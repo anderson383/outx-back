@@ -6,14 +6,14 @@ import { ProductDaoService } from './adapters/dao/product/product-dao.service';
 
 @Module({
   providers: [
-  ListProductHandler,
-  {
-  provide: ProductDao,
-  useClass: ProductDaoService
-  }
+    ListProductHandler,
+    {
+      provide: ProductDao,
+      useClass: ProductDaoService
+    }
   ],
   controllers: [
-  ProductController
+    ProductController
   ]
-  })
+})
 export class ProductModule {}

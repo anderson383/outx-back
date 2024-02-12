@@ -29,16 +29,16 @@ const providerAndExport = [
 
   ],
   providers: [
-  GetGenericListHandler,
-  GetCategoryHandler,
-  ...providerAndExport
+    GetGenericListHandler,
+    GetCategoryHandler,
+    ...providerAndExport
   ],
   controllers: [
-  ConfigurationController
+    ConfigurationController
   ],
   exports: [
-  ...providerAndExport
+    ...providerAndExport
   ]
-  })
+})
 export class ConfigurationModule {}
 

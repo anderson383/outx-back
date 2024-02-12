@@ -30,7 +30,7 @@ export class UserEntity extends BaseEntity {
     nullable: true,
     type: 'jsonb',
     transformer: new JsonObjectTransformer()
-    })
+  })
     jsonData: object;
 
   @Column()
@@ -48,14 +48,10 @@ export class UserEntity extends BaseEntity {
   @Column({nullable: true})
     companyId?: string;
 
-  @Column({
-    default: false
-    })
+  @Column({default: false})
     isGoogle: boolean;
 
-  @Column({
-    default: false
-    })
+  @Column({default: false})
     isFacebook: boolean;
 }
 

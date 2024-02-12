@@ -8,13 +8,16 @@ export class CategoryCompanyEntity extends BaseEntity {
   @Column({
     length: 100,
     type: 'varchar'
-    })
+  })
     name: string;
 
   @Column({type: 'text'})
     description: string;
 
-  @Column({type: 'int', nullable: true})
+  @Column({
+    type: 'int',
+    nullable: true
+  })
     order: number;
 }
 
@@ -23,13 +26,16 @@ export class CategoryCampusEntity extends BaseEntity {
   @Column({
     length: 100,
     type: 'varchar'
-    })
+  })
     name: string;
 
   @Column({type: 'text'})
     description: string;
 
-  @Column({type: 'int', nullable: true})
+  @Column({
+    type: 'int',
+    nullable: true
+  })
     order: number;
 
   @ManyToOne(() => CategoryCompanyEntity)

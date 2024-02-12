@@ -11,27 +11,27 @@ import { UserController } from './controllers/user.controller';
 
 @Module({
   providers: [
-  ListUserHandler,
-  GetUserAuthHandler,
-  CreateUserHandler,
-  {
-  provide: UserDao,
-  useClass: DaoUserService
-  },
-  {
-  provide: RepositoryUser,
-  useClass: RepositoryUserService
-  }
+    ListUserHandler,
+    GetUserAuthHandler,
+    CreateUserHandler,
+    {
+      provide: UserDao,
+      useClass: DaoUserService
+    },
+    {
+      provide: RepositoryUser,
+      useClass: RepositoryUserService
+    }
   ],
   exports: [{
-  provide: UserDao,
-  useClass: DaoUserService
+    provide: UserDao,
+    useClass: DaoUserService
   },
   {
-  provide: RepositoryUser,
-  useClass: RepositoryUserService
+    provide: RepositoryUser,
+    useClass: RepositoryUserService
   }],
   controllers: [UserController]
-  })
+})
 export class UserModule {}
 

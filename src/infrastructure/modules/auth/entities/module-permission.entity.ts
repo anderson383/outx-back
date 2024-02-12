@@ -10,7 +10,7 @@ export class ModulePermissionEntity extends BaseEntity {
   @Column({
     length: 100,
     type: 'varchar'
-    })
+  })
     name_accesss: string;
 
   @ManyToOne(() => RoleEntity)

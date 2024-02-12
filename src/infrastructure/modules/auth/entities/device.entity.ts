@@ -8,12 +8,12 @@ export class DeviceEntity extends BaseEntity {
   @Column({
     length: 100,
     type: 'varchar'
-    })
+  })
     name: string;
   @Column({
     length: 100,
     type: 'varchar'
-    })
+  })
     platform: string;
 
   @Column({type: 'float'})
