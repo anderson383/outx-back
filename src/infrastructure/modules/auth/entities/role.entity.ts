@@ -8,6 +8,6 @@ export class RoleEntity extends BaseEntity {
   @Column({
     length: 100,
     type: 'varchar'
-    })
+  })
     name: string;
 }

@@ -8,19 +8,17 @@ export class BaseEntity {
   @Column({
     nullable: false,
     default: () => 'CURRENT_TIMESTAMP'
-    })
+  })
     created_date: Date;
 
   @Column({
     nullable: false,
     default: () => 'CURRENT_TIMESTAMP',
     onUpdate: 'NOW()'
-    })
+  })
     updated_date: Date;
 
-  @Column({
-    default: true,
-    })
+  @Column({default: true})
     status: boolean;
 
   // @ManyToOne(() => UserEntity, {nullable: true})

@@ -1,16 +1,14 @@
 import {
   CategoryCampusEntity, CategoryCompanyEntity
 } from 'src/infrastructure/modules/configuration/entities/category-campus.entity';
-import { ConfigurationDao } from 'src/domain/configuration/dao/configuration.dao';
 import {
   EntityManager, In
 } from 'typeorm';
-import {
-  Injectable, InternalServerErrorException
-} from '@nestjs/common';
+import { ConfigurationDao } from 'src/domain/configuration/dao/configuration.dao';
+import {Injectable} from '@nestjs/common';
 import { InjectEntityManager } from '@nestjs/typeorm';
-import { ListTypeEntity } from '../../entities/list-type.entity';
 import { ListItemEntity } from '../../entities/list-item.entity';
+import { ListTypeEntity } from '../../entities/list-type.entity';
 
 @Injectable()
 export class ConfigurationDaoService implements ConfigurationDao {
