@@ -9,7 +9,7 @@ export class IngredientEntity extends BaseEntity {
   @Column({
     length: 100,
     type: 'varchar'
-  })
+    })
     name: string;
   @Column({type: 'text'})
     description: string;
@@ -17,6 +17,6 @@ export class IngredientEntity extends BaseEntity {
   @Column({
     type: 'text',
     array: true
-  })
+    })
     images: string[];
 }

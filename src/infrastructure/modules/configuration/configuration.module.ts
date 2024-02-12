@@ -1,31 +1,44 @@
-import { JwtModule } from '@nestjs/jwt';
-import { JwtTableStrategy } from './strategies/jwt.strategy';
-import { ListTableHandler } from 'src/application/consults/configuration/table/list-table.handler';
+import { CampusRepository } from 'src/domain/configuration/repository/campus';
+import { CampusService } from './adapters/repository/campus.service';
+import { CompanyRepository } from 'src/domain/configuration/repository/company';
+import { CompanyService } from './adapters/repository/company.service';
+import { ConfigurationController } from './controllers/configuration.controller';
+import { ConfigurationDao } from 'src/domain/configuration/dao/configuration.dao';
+import { ConfigurationDaoService } from './adapters/dao/configuration-dao.service';
+import { GetCategoryHandler } from 'src/application/consults/configuration/get-category.handler';
+import { GetGenericListHandler } from 'src/application/consults/configuration/get-generic-list.handler';
 import { Module } from '@nestjs/common';
-import { PassportModule } from '@nestjs/passport';
-import { SECRET_KEYJWT } from 'src/infrastructure/config/constants/jwt';
-import { TableAuthGuard } from './guards/table-auth.guard';
-import { TableDao } from 'src/domain/product/dao/table.dao';
-import { TableDaoService } from './adapters/dao/table-dao.service';
+
+const providerAndExport = [
+  {
+    provide: ConfigurationDao,
+    useClass: ConfigurationDaoService
+  },
+  {
+    provide: CompanyRepository,
+    useClass: CompanyService
+  },
+  {
+    provide: CampusRepository,
+    useClass: CampusService
+  }
+];
 
 @Module({
   imports: [
-    PassportModule.register({ defaultStrategy: 'jwt' }),
-    JwtModule.register({
-      secret: SECRET_KEYJWT,
-      signOptions: { expiresIn: '7h' }
-    })
+
   ],
   providers: [
-    ListTableHandler,
-    JwtTableStrategy,
-    TableAuthGuard,
-    {
-      provide: TableDao,
-      useClass: TableDaoService
-    }
+  GetGenericListHandler,
+  GetCategoryHandler,
+  ...providerAndExport
   ],
-  controllers: []
-})
+  controllers: [
+  ConfigurationController
+  ],
+  exports: [
+  ...providerAndExport
+  ]
+  })
 export class ConfigurationModule {}
 

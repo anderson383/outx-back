@@ -3,6 +3,7 @@ import {
 } from 'typeorm';
 import { BaseEntity } from './../../../config/entity/base.entity';
 import { CampusEntity } from '../../configuration/entities/campus.entity';
+import { CompanyEntity } from '../../configuration/entities/company.entity';
 
 class JsonObjectTransformer {
   to(value: object): string {
@@ -22,23 +23,39 @@ export class UserEntity extends BaseEntity {
   @Column()
     name: string;
 
+  @Column()
+    uid: string;
+
   @Column({
     nullable: true,
     type: 'jsonb',
     transformer: new JsonObjectTransformer()
-  })
+    })
     jsonData: object;
 
   @Column()
     email: string;
 
-  @Column()
+  @Column({nullable: true})
+    photoUrl?: string;
+
+  @Column({nullable: true})
     username: string;
 
-  @ManyToMany(() => CampusEntity)
-    campus?: CampusEntity[];
+  @ManyToMany(() => CompanyEntity)
+    company?: CompanyEntity[];
 
-  @Column()
-    password: string;
+  @Column({nullable: true})
+    companyId?: string;
+
+  @Column({
+    default: false
+    })
+    isGoogle: boolean;
+
+  @Column({
+    default: false
+    })
+    isFacebook: boolean;
 }
 

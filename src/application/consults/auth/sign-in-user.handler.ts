@@ -6,9 +6,15 @@ import {
 } from '@nestjs/common';
 import { AuthCredentialsDto } from 'src/application/comanders/dtos/auth.dto';
 import { AuthDao } from 'src/domain/auth/dao/auth.dao';
+import { authFireBase } from 'src/main';
 import { JwtService } from '@nestjs/jwt';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 import { UserDao } from 'src/domain/user/dao/dao-user';
 
+export interface LoginResponse {
+  accessToken: string;
+  refreshToken: string
+}
 @Injectable()
 export class SignInUserHandler {
   constructor(
@@ -16,21 +22,31 @@ export class SignInUserHandler {
     private _userDao: UserDao,
     private jwtService: JwtService
   ) {}
-  async execute(authCredentils: AuthCredentialsDto): Promise<{accessToken: string, refreshToken: string}> {
-    const findUser = await this._userDao.getUserByEmail(authCredentils.email);
+  public async execute(authCredentils: AuthCredentialsDto): Promise<LoginResponse> {
+    try {
+      const {
+        email, password
+      } = authCredentils;
 
-    const validUser = await this.validateUserCredentials(
-      authCredentils.password,
-      findUser.password,
-    );
+      const userAuth = await signInWithEmailAndPassword(
+        authFireBase,
+        email,
+        password,
+      );
 
-    if (findUser && validUser) {
-      return await this.getTokens({
-        sub: findUser.id,
-        id: findUser.id,
-        name: findUser.name,
-        email: findUser.email
-      });
+      const findUser = await this._userDao.getUserByUid(userAuth.user.uid);
+
+      if (findUser) {
+        return await this.getTokens({
+          sub: findUser.id,
+          id: findUser.id,
+          name: findUser.name,
+          email: findUser.email
+        });
+      }
+    } catch (err) {
+      console.error(err);
+      throw new UnauthorizedException('Credenciales del usuario invalidas');
     }
 
     throw new UnauthorizedException();

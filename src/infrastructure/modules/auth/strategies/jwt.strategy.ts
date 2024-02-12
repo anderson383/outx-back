@@ -9,11 +9,12 @@ import { GetUserRolesHandler } from '../../../../application/consults/auth/get-u
 import { AuthDto } from 'src/application/comanders/dtos/auth.dto';
 import { PassportStrategy } from '@nestjs/passport';
 import { SECRET_KEYJWT } from 'src/infrastructure/config/constants/jwt';
+import { UserDao } from 'src/domain/user/dao/dao-user';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(
-    private _getUserRoles: GetUserRolesHandler
+    private _userDao: UserDao,
   ) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -23,20 +24,16 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 
   async validate(userPayload: AuthDto): Promise<any> {
     // Validate user roles
-    const user = await this._getUserRoles.execute();
+    const user = await this._userDao.getUserByEmail(userPayload.email);
 
     if (!user) {
       throw new UnauthorizedException();
     }
 
-    return;
-
-    // {
-    // id: user.id,
-    // name: user.name,
-    // identification: user.identification,
-    // state: user.state,
-    // email: user.email
-    // };
+    return {
+      id: user.id,
+      name: user.name,
+      email: user.email
+    };
   }
 }

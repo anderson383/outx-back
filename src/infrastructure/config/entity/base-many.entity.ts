@@ -9,7 +9,7 @@ export class BaseManyEntity {
   @Column({
     nullable: false,
     default: () => 'CURRENT_TIMESTAMP'
-  })
+    })
     created_date: Date;
 
   @ManyToOne(() => UserEntity)

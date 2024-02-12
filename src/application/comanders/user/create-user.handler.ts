@@ -8,6 +8,6 @@ export class CreateUserHandler {
   constructor(private _repositoryUser: RepositoryUser) {}
 
   async execute(user: UserCreateDto) {
-    return this._repositoryUser.create(user);
+    return;
   }
 }
