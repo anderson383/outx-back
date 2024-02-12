@@ -22,7 +22,6 @@ export class JwtTableStrategy extends PassportStrategy(Strategy) {
 
   async validate(userPayload: AuthDto): Promise<any> {
     // Validate user roles
-    console.log('xd');
     const user = {};
 
     // if (!user) {
