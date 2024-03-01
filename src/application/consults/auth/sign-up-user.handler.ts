@@ -36,10 +36,7 @@ export class SignUpUserHandler {
     accessToken: string;
     refreshToken: string
   }> {
-    console.log('xd2', singUp);
     const findUser = await this._userDao.getUserByEmail(singUp.email);
-
-    console.log('xd', findUser);
 
     if (findUser) {
       throw new NotFoundException('El usuario con el correo ya existe xd');
