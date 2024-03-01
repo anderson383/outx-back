@@ -2,6 +2,7 @@ import { ConfigService } from '@nestjs/config';
 import { EnvVariables } from './env/env-variables.enum';
 
 export const dataBaseConfigFactory = (configService: ConfigService) => ({
+  'extra': {'ssl': 'true'},
   type: configService.get(EnvVariables.DATABASE_TYPE),
   host: configService.get(EnvVariables.DATABASE_HOST),
   port: configService.get(EnvVariables.DATABASE_PORT),
@@ -10,7 +11,7 @@ export const dataBaseConfigFactory = (configService: ConfigService) => ({
   database: configService.get(EnvVariables.DATABASE_NAME),
 
   entities: [configService.get(EnvVariables.TYPEORM_ENTITIES_DIR)],
-  synchronize: true,
+  synchronize: false,
   logging: true,
 
   migrationsTableName: configService.get(

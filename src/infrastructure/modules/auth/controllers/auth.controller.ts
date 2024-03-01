@@ -17,11 +17,15 @@ export class AuthController {
   }
   @Post('sign-in')
   signIn(@Body() credentials: AuthCredentialsDto) {
+    console.log('credentials', credentials);
+
     return this._signInUserHandler.execute(credentials);
   }
 
   @Post('sign-up')
   signUp(@Body() dataSignUp: AuthDataSignDto) {
+    console.log(dataSignUp, 'TransformInterceptor');
+
     return this._signUpUserHandler.execute(dataSignUp);
   }
 }
